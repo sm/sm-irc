@@ -1,0 +1,5 @@
+version=0.3.4
+base_url=http://www.weechat.org/files/src
+archive_format=tar.bz2
+repository_url=git://git.sv.gnu.org/weechat.git
+website=http://www.weechat.org

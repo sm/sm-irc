@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+
+#weechat_configure()
+#{
+#  # Remove all arch flags from the PERL_*FLAGS as we specify them ourselves.
+#  # This messes up because the system perl is a fat binary with 32,64 and PPC
+#  # compiles, but our deps don't have that.
+#  if os_is_darwin
+#  then
+#    archs=("-arch ppc" "-arch i386" "-arch x86_64")
+#  fi
+#  replace_contents "^.*IF(PERL_FOUND).*$"
+#  with
+#  in "src/plugins/scripts/perl/CMakeLists.txt"
+#
+#
+#
+#  #inreplace  "src/plugins/scripts/perl/CMakeLists.txt", 'IF(PERL_FOUND)', 'IF(PERL_FOUND)' +
+#  ="\n  STRING(REGEX REPLACE \"${archs.join '|'}\" \"\" PERL_CFLAGS \"${PERL_CFLAGS}\")"
+#  ="\n  STRING(REGEX REPLACE \"${archs.join '|'}\" \"\" PERL_LFLAGS \"${PERL_LFLAGS}\")"
+#
+#  #FIXME: Compiling perl module doesn't work
+#  #NOTE: -DPREFIX has to be specified because weechat devs enjoy being non-standard
+#  cmake -DPREFIX="${install_path}" -DENABLE_RUBY=OFF -DENABLE_PERL=OFF
+#
+#  # TODO: v v v eh?
+#  # std_cmake_parameters, "."
+#}
