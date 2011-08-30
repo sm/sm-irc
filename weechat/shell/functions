@@ -6,7 +6,7 @@
 #  # Remove all arch flags from the PERL_*FLAGS as we specify them ourselves.
 #  # This messes up because the system perl is a fat binary with 32,64 and PPC
 #  # compiles, but our deps don't have that.
-#  if os_is_darwin
+#  if os is darwin
 #  then
 #    archs=("-arch ppc" "-arch i386" "-arch x86_64")
 #  fi
