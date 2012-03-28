@@ -1,0 +1,15 @@
+#!/bin/sh
+
+user is root || log error "Must be run as root, please rerun as root."
+
+path create '/etc/inspircd'
+
+templates=(
+inspircd.censor inspircd.conf inspircd.filter inspircd.helpop
+inspircd.helpop-full inspircd.motd inspircd.quotes inspircd.rules links.conf
+modules.conf opers.conf
+)
+
+for template in ${templates[@]}
+do template install "inspircd/${template}" to "/etc/inspircd/${template}" ; done
+

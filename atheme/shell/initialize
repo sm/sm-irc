@@ -1,0 +1,7 @@
+#!/bin/sh
+
+typeset -g version url package archive_format source_path
+typeset -ga configure_flags make_flags templates
+
+source_path="/usr/local/src"
+

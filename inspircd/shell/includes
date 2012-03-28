@@ -1,0 +1,8 @@
+api/user
+api/command
+api/files
+api/paths
+api/config
+api/variables
+api/templates
+api/package

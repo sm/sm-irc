@@ -1,4 +1,4 @@
-version=0.202
+version=0.204
 base_url=http://znc.in/releases
 website_url=http://wiki.znc.in/ZNC
 repository_url=https://github.com/znc/znc

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+user is root || log error "Must be run as root, please rerun as root."
+
+# TODO: Use api/package
+
+package="atheme"
+version="6.0.10"
+archive_format="tar.bz2"
+#url="http://www.atheme.net/downloads/atheme-services-${version}.${archive_format}"
+url="http://overnothing.com/src/${package}-${version}.${archive_format}"
+configure_flags=( --prefix=/usr/local/atheme )
+make_flags=()
+
+fetch && build

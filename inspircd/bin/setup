@@ -1,0 +1,21 @@
+#!/bin/sh
+
+user is root || log error "Must be run as root, please rerun as root."
+
+if ldconfig -p | grep -q libssl
+then
+  log error \
+"You must first ensure that openssl with development headers are installled on
+the system before proceeding. Please install them and then rerun this."
+fi
+
+user create unless exists \
+  name 'ircd' home '/home/ircd' shell '/bin/sh'
+
+package="inspircd"
+version="2.0.5"
+#url="http://void.ext3.net/inspircd-v${version}.tar.gz"
+archive_format="tar.gz"
+url="http://overnothing.com/src/${package}-${version}.${archive_format}"
+fetch && build
+

@@ -1,0 +1,57 @@
+#!/bin/sh
+
+fetch()
+{
+  log "=> Fetching and Extracting ${package}"
+  if ! path exists "${source_path}" ; then path create "${source_path}" ; fi
+  path enter "${source_path}"
+
+  for dir in $(find ${source_path} -maxdepth 1 -iname "${package}*" -type d)
+  do path remove "${dir}" ; done
+
+  if file exists "${package}-${version}.${archive_format}"
+  then
+    config read into "sha512" \
+      key "${package}-${version}.${archive_format}" from "${extension}" file "sha512"
+
+    if variable is nonempty sha512
+    then
+      file write string "${sha512}" to "/tmp/sha512"
+
+      if ! sha512sum --check "/tmp/sha512" "${package}-${version}.${archive_format}"
+      then curl -L "${url}" -o "${package}-${version}.${archive_format}" ; fi
+
+      file remove "/tmp/sha512"
+    else
+      curl -L "${url}" -o "${package}-${version}.${archive_format}"
+    fi
+  else
+    curl -L "${url}" -o "${package}-${version}.${archive_format}"
+  fi
+
+  case "${archive_format}" in
+    (*bz2*)
+      tar -jxf "${package}-${version}.${archive_format}"
+      ;;
+    (*gz*)
+      tar -zxf "${package}-${version}.${archive_format}"
+      ;;
+    (*)
+      log fail "Unknown archive format '${archive_format}'"
+      ;;
+  esac
+
+  for dir in $(find ${source_path} -maxdepth 1 -iname "${package}*" -type d )
+  do path move from "${dir}" to "${source_path}/${package}-${version}" ; done
+}
+
+build()
+{
+  log "=> Building and Installing ${package}"
+
+  path enter "${source_path}/${package}-${version}"
+  ./configure  "${configure_flags[@]}"
+  make ${make_flags[@]}
+  make ${make_flags[@]} install
+}
+

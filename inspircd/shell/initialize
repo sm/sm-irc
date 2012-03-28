@@ -1,0 +1,17 @@
+#!/bin/sh
+
+typeset -g version url package archive_format source_path ircd_user
+typeset -ga configure_flags make_flags templates
+
+if user is root
+then ircd_user="ircd"
+else ircd_user="$USER" ; fi
+
+source_path="/usr/local/src"
+
+configure_flags=( --prefix=/usr/local/inspircd --disable-interactive
+--enable-gnutls --enable-openssl --enable-optimization=2 --uid="${ircd_user}"
+)
+
+make_flags=(INSTUID="${ircd_user}")
+

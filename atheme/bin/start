@@ -1,0 +1,6 @@
+#!/bin/sh
+
+user is root || log error "Must be run as root, please rerun as root."
+
+/usr/local/atheme/bin/atheme-services start
+

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+user is root || log error "Must be run as root, please rerun as root."
+
+path create '/etc/atheme'
+
+templates=(
+atheme.conf atheme.cron atheme.motd atheme.conf.openserv atheme.conf.userserv
+)
+
+for template in ${templates[@]}
+do
+  template install "atheme/${template}" to "/etc/atheme/${template}"
+done
+

@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# crontab script for atheme
+#
+
+# Change this to the directory where you installed it
+prefix=$HOME/atheme/
+pidfile=var/atheme.pid
+
+cd "$prefix" || {
+	echo "$0: couldn't cd to $prefix"
+	exit 1
+}
+
+if [ -f "$pidfile" ] ; then
+  PID=$(cat "$pidfile")
+
+  if kill -0 $PID >/dev/null 2>&1
+  then exit 0 ; fi
+
+  rm -f "$pidfile"
+fi
+
+echo "$0: couldn't find atheme running, restarting..."
+
+./bin/atheme-services
+
+exit 0
